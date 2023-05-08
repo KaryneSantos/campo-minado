@@ -1,0 +1,48 @@
+table {
+    border-spacing: 1px;
+    background-color: #aaa;
+    margin: 1em auto;
+}
+
+h1{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div{
+    text-align: center;
+}
+
+.botao {
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    border: 5px outset #eee;
+    background-color: #ccc;
+}
+
+.botao-aberto {
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    /* border: 5px solid #aaa; */
+    background-color: #ccc;
+}
+
+.botao-bandeira {
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    /* border: 5px outset #eee; */
+    border: 5px solid #ccc;
+    background: #ccc center/contain url('img/bandeira.png') no-repeat;
+}
+
+.botao-bomba {
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    /* border: 5px outset #eee; */
+    border: 5px solid #ccc;
+    background: #ccc center/contain url('img/bombear.png') no-repeat;
+}
