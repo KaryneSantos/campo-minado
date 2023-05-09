@@ -4,6 +4,9 @@ var mapaDeMinas = [];
 
 function iniciar() {
   console.log("Iniciando jogo...");
+  document.addEventListener("contextmenu", (evento) => {
+    evento.preventDefault();
+  });
   gerarMapa();
   desenharMapa();
 }
@@ -32,7 +35,7 @@ function desenharMapa() {
   for (var linha = 0; linha < tamanhoDoMapa; linha++) {
     linhasDaTabela += "<tr>";
     for (var coluna = 0; coluna < tamanhoDoMapa; coluna++) {
-      linhasDaTabela += `<td class='botao' onclick='cliqueDoUsuario(${linha}, ${coluna})'></td>`;
+      linhasDaTabela += `<td class='botao' onclick='cliqueDoUsuario(${linha}, ${coluna})' oncontextmenu='adicionarBandeira(${linha}, ${coluna})'></td>`;
     }
     linhasDaTabela += "</tr>";
   }
@@ -43,10 +46,17 @@ function desenharMapa() {
   console.log("Desenhado");
 }
 
-function cliqueDoUsuario(linha, coluna) {
+function cliqueDoUsuario(linha, coluna, evento) {
   console.log("clique do usuario na linha", linha, "coluna", coluna);
 
   var tabela = document.querySelector("table");
+
+  if (evento && evento.button === 2) {
+    adicionarBandeira(linha, coluna, tabela, evento);
+    evento.preventDefault();
+    return;
+  }
+
 
   if (mapaDeMinas[linha][coluna] === 0) {
     tabela.rows[linha].cells[coluna].className = "botao-aberto";
@@ -55,6 +65,23 @@ function cliqueDoUsuario(linha, coluna) {
     tabela.rows[linha].cells[coluna].className = "botao-bomba";
     mostrarBombas()
 }
+}
+
+function adicionarBandeira(linha, coluna, tabela){
+  console.log("adicionando bandeira...")
+
+  if(!tabela){
+    tabela = document.querySelector('table');
+  }
+
+  if (tabela.rows[linha].cells[coluna].className === "botao-aberto") {
+    return;
+  }
+  if (tabela.rows[linha].cells[coluna].className === "botao-bandeira") {
+    tabela.rows[linha].cells[coluna].className = "botao";
+  } else {
+    tabela.rows[linha].cells[coluna].className = "botao-bandeira";
+  }
 }
 
 function mostrarBombas(){
