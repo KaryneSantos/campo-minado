@@ -14,6 +14,8 @@ function iniciar() {
 function gerarMapa() {
   console.log("Gerando mapa de minas...");
 
+  var contagem_bombas = 0;
+
   for (var i = 0; i < tamanhoDoMapa; i++) {
     mapaDeMinas[i] = Array(tamanhoDoMapa).fill(0);
   }
@@ -21,10 +23,14 @@ function gerarMapa() {
   for (var coluna = 0; coluna < tamanhoDoMapa; coluna++) {
     for (var linha = 0; linha < tamanhoDoMapa; linha++) {
       mapaDeMinas[linha][coluna] = Math.floor(Math.random() * 2);
+      if(mapaDeMinas[linha][coluna] == 1){
+        contagem_bombas++
+      }
     }
   }
 
   console.log("Mapa gerado:", mapaDeMinas);
+  console.log("Quantidade de bombas:", contagem_bombas);
 }
 
 function desenharMapa() {
@@ -35,7 +41,7 @@ function desenharMapa() {
   for (var linha = 0; linha < tamanhoDoMapa; linha++) {
     linhasDaTabela += "<tr>";
     for (var coluna = 0; coluna < tamanhoDoMapa; coluna++) {
-      linhasDaTabela += `<td class='botao' onclick='cliqueDoUsuario(${linha}, ${coluna})' oncontextmenu='adicionarBandeira(${linha}, ${coluna})'></td>`;
+      linhasDaTabela += `<td class='botao' onclick='cliqueDoUsuario(${linha}, ${coluna})' oncontextmenu='adicionarBandeira(${linha}, ${coluna}), event'></td>`;
     }
     linhasDaTabela += "</tr>";
   }
