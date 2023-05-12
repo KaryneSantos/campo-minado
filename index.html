@@ -11,14 +11,16 @@
 <body onload="iniciar()">
 
   <h1>Campo Minado</h1>
-  <div>
+  <div id="jogo" class="visivel">
     <label style="font-family: Arial, Helvetica, sans-serif;">Dificuldade:</label>
           <select id="dificuldade" onchange="selecionarNiveis()">
             <option value="1" selected>Fácil</option>
             <option value="2">Intermediário</option>
             <option value="3">Difícil</option>
           </select>
-        </div>     
-  <table></table>   
-    </body>
+         <table></table>
+</div>
+    <div id="msgGanhou" class="invisivel"><p>Ganhou</p><button id="btnReiniciar" onclick="reiniciar()">Reiniciar</button></div>
+    <div id="msgPerdeu" class="invisivel"><p>Perdeu</p><button id="btnReiniciar" onclick="reiniciar()">Reiniciar</button></div>
+  </body>
 </html>

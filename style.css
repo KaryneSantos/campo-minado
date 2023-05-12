@@ -46,3 +46,11 @@ div{
     border: 5px solid #ccc;
     background: #ccc center/contain url('img/bombear.png') no-repeat;
 }
+
+.visivel{
+    display: block;
+}
+
+.invisivel{
+    display: none;
+}

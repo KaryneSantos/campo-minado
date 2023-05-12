@@ -1,3 +1,4 @@
+var terminou = false;
 var tamanhoDoMapa = 3;
 var mapaDeMinas = [];
 
@@ -11,21 +12,24 @@ function iniciar() {
   desenharMapa();
 }
 
-function gerarMapa() {
+function gerarMapa(){
   console.log("Gerando mapa de minas...");
 
+  mapaDeMinas = [];
   var contagem_bombas = 0;
+
+  var bombas_nivel = Math.round((tamanhoDoMapa * tamanhoDoMapa) / 2)
 
   for (var i = 0; i < tamanhoDoMapa; i++) {
     mapaDeMinas[i] = Array(tamanhoDoMapa).fill(0);
   }
 
-  for (var coluna = 0; coluna < tamanhoDoMapa; coluna++) {
-    for (var linha = 0; linha < tamanhoDoMapa; linha++) {
-      mapaDeMinas[linha][coluna] = Math.floor(Math.random() * 2);
-      if(mapaDeMinas[linha][coluna] == 1){
-        contagem_bombas++
-      }
+  while(contagem_bombas < bombas_nivel){
+    var coluna = Math.floor(Math.random() * tamanhoDoMapa);
+    var linha = Math.floor((Math.random() * tamanhoDoMapa));
+    if(mapaDeMinas[linha][coluna] == 0){
+      mapaDeMinas[linha][coluna] = 1;
+      contagem_bombas++
     }
   }
 
@@ -53,6 +57,11 @@ function desenharMapa() {
 }
 
 function cliqueDoUsuario(linha, coluna, evento) {
+  // Impedir que o úsuario clique se já ganhou. 
+  if(terminou){
+    console.log("não pode mais clicar, o jogo terminou.");
+    return;
+  }
   console.log("clique do usuario na linha", linha, "coluna", coluna);
 
   var tabela = document.querySelector("table");
@@ -69,11 +78,20 @@ function cliqueDoUsuario(linha, coluna, evento) {
     verificarGanhou()
   } else if (mapaDeMinas[linha][coluna] === 1) {
     tabela.rows[linha].cells[coluna].className = "botao-bomba";
+    var divMensagem = document.getElementById("msgPerdeu")
+      terminou = true;
+      divMensagem.className = "visivel"
     mostrarBombas()
 }
 }
 
 function adicionarBandeira(linha, coluna, tabela){
+
+  if(terminou){
+    console.log("não pode mais clicar, o jogo terminou.");
+    return;
+  }
+
   console.log("adicionando bandeira...")
 
   if(!tabela){
@@ -118,10 +136,20 @@ function verificarGanhou(){
     }
     if(qtdZeros == btnVazios){
         console.log("ganhou")
+        var divJogo = document.getElementById("jogo")
+        var divMensagem = document.getElementById("msgGanhou")
+        terminou = true;
+        // divJogo.className = 'invisivel'
+        divMensagem.className = 'visivel'
     }
 }
 
 function selecionarNiveis(){
+
+  if(terminou){
+    console.log("não pode mais clicar, o jogo terminou.");
+    return;
+  }
     var select = parseInt(document.getElementById("dificuldade").value)
     console.log("selecionado: ", select);
     switch(select){
@@ -140,3 +168,13 @@ function selecionarNiveis(){
     }
  }
 
+ function reiniciar(){
+  iniciar();
+  var divJogo = document.getElementById("jogo")
+  var divMensagemGanhou = document.getElementById("msgGanhou")
+  var divMensagemPerdeu = document.getElementById("msgPerdeu")
+  terminou = false;
+  divJogo.className = 'visivel'
+  divMensagemGanhou.className = 'invisivel'
+  divMensagemPerdeu.className = 'invisivel'
+ }
