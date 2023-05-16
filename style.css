@@ -1,7 +1,13 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+}
+
 table {
     border-spacing: 1px;
     background-color: #aaa;
-    margin: 1em auto;
 }
 
 h1{
@@ -25,7 +31,6 @@ div{
     text-align: center;
     width: 50px;
     height: 50px;
-    /* border: 5px solid #aaa; */
     background-color: #ccc;
 }
 
@@ -33,7 +38,6 @@ div{
     text-align: center;
     width: 50px;
     height: 50px;
-    /* border: 5px outset #eee; */
     border: 5px solid #ccc;
     background: #ccc center/contain url('img/bandeira.png') no-repeat;
 }
@@ -42,7 +46,6 @@ div{
     text-align: center;
     width: 50px;
     height: 50px;
-    /* border: 5px outset #eee; */
     border: 5px solid #ccc;
     background: #ccc center/contain url('img/bombear.png') no-repeat;
 }
@@ -53,4 +56,37 @@ div{
 
 .invisivel{
     display: none;
+}
+
+.borda-externa{
+    border: 5px outset #eee;
+    margin: 1em auto;
+}
+
+.borda-interna{
+    border: 5px inset #eee;
+}
+select{
+    margin: 10px auto;
+}
+
+.quantidadeBombas{
+    display: inline-block;
+    height: 35px;
+    width: 70px;
+    font-size: 25px;
+    background-color: black;
+    color: red;
+    text-align: center;
+}
+
+
+.tempo{
+    display: inline-block;
+    height: 35px;
+    width: 70px;
+    font-size: 25px;
+    background-color: black;
+    color: red;
+    text-align: center;
 }

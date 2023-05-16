@@ -16,25 +16,27 @@ function gerarMapa(){
   console.log("Gerando mapa de minas...");
 
   mapaDeMinas = [];
-  var contagem_bombas = 0;
+  var contagemBombas = 0;
 
-  var bombas_nivel = Math.round((tamanhoDoMapa * tamanhoDoMapa) / 2)
+  var bombasNiveis = Math.round((tamanhoDoMapa * tamanhoDoMapa) / 2)
 
   for (var i = 0; i < tamanhoDoMapa; i++) {
     mapaDeMinas[i] = Array(tamanhoDoMapa).fill(0);
   }
 
-  while(contagem_bombas < bombas_nivel){
+  while(contagemBombas < bombasNiveis){
     var coluna = Math.floor(Math.random() * tamanhoDoMapa);
     var linha = Math.floor((Math.random() * tamanhoDoMapa));
     if(mapaDeMinas[linha][coluna] == 0){
       mapaDeMinas[linha][coluna] = 1;
-      contagem_bombas++
+      contagemBombas++
     }
   }
 
+  var contador = document.getElementById('contadorDeBombas');
+  contador.value;
+  contador.innerHTML = contagemBombas;  
   console.log("Mapa gerado:", mapaDeMinas);
-  console.log("Quantidade de bombas:", contagem_bombas);
 }
 
 function desenharMapa() {
@@ -57,12 +59,14 @@ function desenharMapa() {
 }
 
 function cliqueDoUsuario(linha, coluna, evento) {
+  iniciarTempo(linha, coluna);
   // Impedir que o úsuario clique se já ganhou. 
   if(terminou){
     console.log("não pode mais clicar, o jogo terminou.");
     return;
   }
   console.log("clique do usuario na linha", linha, "coluna", coluna);
+
 
   var tabela = document.querySelector("table");
 
@@ -178,3 +182,7 @@ function selecionarNiveis(){
   divMensagemGanhou.className = 'invisivel'
   divMensagemPerdeu.className = 'invisivel'
  }
+
+function iniciarTempo(linha, coluna){
+  
+}
