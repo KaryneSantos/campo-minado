@@ -60,11 +60,14 @@ div{
 
 .borda-externa{
     border: 5px outset #eee;
-    margin: 1em auto;
 }
 
 .borda-interna{
     border: 5px inset #eee;
+}
+
+.borda-redor{
+    border: 5px outset #eee;
 }
 select{
     margin: 10px auto;
@@ -89,4 +92,16 @@ select{
     background-color: black;
     color: red;
     text-align: center;
+    margin: 1em auto;
+}
+
+.botao-reniciar{
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border: 5px inset #eee;
+    background: #ccc center/contain url('img/feliz.png') no-repeat;
+    margin: 1em auto;
 }

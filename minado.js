@@ -14,7 +14,6 @@ function iniciar() {
 
 function gerarMapa(){
   console.log("Gerando mapa de minas...");
-
   mapaDeMinas = [];
   var contagemBombas = 0;
 
@@ -28,7 +27,7 @@ function gerarMapa(){
     var coluna = Math.floor(Math.random() * tamanhoDoMapa);
     var linha = Math.floor((Math.random() * tamanhoDoMapa));
     if(mapaDeMinas[linha][coluna] == 0){
-      mapaDeMinas[linha][coluna] = 1;
+      mapaDeMinas[linha][coluna] = "*";
       contagemBombas++
     }
   }
@@ -55,12 +54,11 @@ function desenharMapa() {
   var tabela = document.querySelector("table");
   tabela.innerHTML = linhasDaTabela;
 
+  gerarNumero();
   console.log("Desenhado");
 }
 
 function cliqueDoUsuario(linha, coluna, evento) {
-  iniciarTempo(linha, coluna);
-  // Impedir que o úsuario clique se já ganhou. 
   if(terminou){
     console.log("não pode mais clicar, o jogo terminou.");
     return;
@@ -77,10 +75,10 @@ function cliqueDoUsuario(linha, coluna, evento) {
   }
 
 
-  if (mapaDeMinas[linha][coluna] === 0) {
+  if (mapaDeMinas[linha][coluna] != "*") {
     tabela.rows[linha].cells[coluna].className = "botao-aberto";
     verificarGanhou()
-  } else if (mapaDeMinas[linha][coluna] === 1) {
+  } else if (mapaDeMinas[linha][coluna] === "*") {
     tabela.rows[linha].cells[coluna].className = "botao-bomba";
     var divMensagem = document.getElementById("msgPerdeu")
       terminou = true;
@@ -115,7 +113,7 @@ function adicionarBandeira(linha, coluna, tabela){
 function mostrarBombas(){
     for(var coluna = 0; coluna < tamanhoDoMapa; coluna++){
         for(var linha = 0; linha < tamanhoDoMapa; linha++){
-            if(mapaDeMinas[linha][coluna] == 1) {
+            if(mapaDeMinas[linha][coluna] == "*") {
                 var tabela = document.querySelector("table");
                 tabela.rows[linha].cells[coluna].className = "botao-bomba";
             }
@@ -133,7 +131,7 @@ function verificarGanhou(){
             if(tabela.rows[linha].cells[coluna].className == "botao-aberto"){
                 btnVazios++
             }
-            if(mapaDeMinas[linha][coluna] == 0){
+            if(mapaDeMinas[linha][coluna] != "*"){
                 qtdZeros++
             }
         }
@@ -143,7 +141,6 @@ function verificarGanhou(){
         var divJogo = document.getElementById("jogo")
         var divMensagem = document.getElementById("msgGanhou")
         terminou = true;
-        // divJogo.className = 'invisivel'
         divMensagem.className = 'visivel'
     }
 }
@@ -183,6 +180,23 @@ function selecionarNiveis(){
   divMensagemPerdeu.className = 'invisivel'
  }
 
-function iniciarTempo(linha, coluna){
-  
-}
+ function gerarNumero(){
+  for(var linha = 0; linha < tamanhoDoMapa; linha++){
+    for(var coluna = 0; coluna < tamanhoDoMapa; coluna++){
+      if(mapaDeMinas[linha][coluna] == 0){
+
+        var quantidadeAoRedor = 0;
+
+        for(var i = linha - 1; i <= linha + 1; i++){
+          for(var j = coluna - 1; j <= coluna + 1; j++){
+            if(i >= 0 && i < tamanhoDoMapa && j >= 0 && j < tamanhoDoMapa && mapaDeMinas[i][j] == "*"){
+              quantidadeAoRedor++
+            }
+          }
+      }
+      mapaDeMinas[linha][coluna] = quantidadeAoRedor;
+      console.log(quantidadeAoRedor+" linha: "+linha+" coluna: "+coluna)
+    }
+  }
+  }
+ }
