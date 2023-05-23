@@ -18,22 +18,20 @@
             <option value="2">Intermediário</option>
             <option value="3">Difícil</option>
           </select>
+          <div class="borda-externa-jogo">
+          <div class="borda-interna-contador">
           <div id="tempo">
             <div id="contadorDeBombas" class="quantidadeBombas">00</div>
-            <div id="btnReiniciar" class="botao-reniciar" onclick="reniciar()"></div>
+            <div id="btnReiniciar" class="botao-reiniciar" onclick="reiniciar()"></div>
             <div id="temporizador" class="temporizador">0:0</div>
           </div>
+        </div>
             <!-- área de jogo  -->
-        <div class="borda-redor">
-          <div class="borda-externa">
             <div class="borda-interna">
          <table></table>
-        </div>
       </div>
-    </div>
-</div>
-    <!-- <div id="msgGanhou" class="invisivel"><p>Ganhou</p><button id="btnReiniciar" onclick="reiniciar()">Reiniciar</button></div>
-    <div id="msgPerdeu" class="invisivel"><p>Perdeu</p><button id="btnReiniciar" onclick="reiniciar()">Reiniciar</button></div> -->
   </div>
+</div>
+<div id="mensagem" class="invisivel">Parabéns! Você ganhou.</div>
   </body>
 </html>

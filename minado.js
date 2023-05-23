@@ -1,7 +1,9 @@
 var terminou = false;
 var tamanhoDoMapa = 3;
 var mapaDeMinas = [];
-var intervalo;
+var intervalo = undefined;
+var contagemBombas = 0;
+var bombasNiveis = 0;
 
 
 function iniciar() {
@@ -16,9 +18,10 @@ function iniciar() {
 function gerarMapa(){
   console.log("Gerando mapa de minas...");
   mapaDeMinas = [];
-  var contagemBombas = 0;
 
-  var bombasNiveis = Math.round((tamanhoDoMapa * tamanhoDoMapa) / 2)
+  contagemBombas = 0;
+
+  bombasNiveis = Math.round((tamanhoDoMapa * tamanhoDoMapa) / 2)
 
   for (var i = 0; i < tamanhoDoMapa; i++) {
     mapaDeMinas[i] = Array(tamanhoDoMapa).fill(0);
@@ -77,13 +80,17 @@ function cliqueDoUsuario(linha, coluna, evento) {
 
   if (mapaDeMinas[linha][coluna] != "*") {
     tabela.rows[linha].cells[coluna].className = "botao-aberto n" + mapaDeMinas[linha][coluna];
+    if(mapaDeMinas[linha][coluna] > 0){
     tabela.rows[linha].cells[coluna].innerHTML = mapaDeMinas[linha][coluna];
+  }
     tempo();
     verificarGanhou();
   } else if (mapaDeMinas[linha][coluna] === "*") {
-    mostrarBombas()
+    mostrarBombas();
     tabela.rows[linha].cells[coluna].className = "botao-bomba botao-bomba-clicou";
+    document.querySelector("#btnReiniciar").className = "botao-reiniciar-perdeu";
       terminou = true;
+      pause();
 }
 }
 
@@ -96,17 +103,26 @@ function adicionarBandeira(linha, coluna, tabela){
 
   console.log("adicionando bandeira...")
 
+
   if(!tabela){
     tabela = document.querySelector('table');
   }
-
   if (tabela.rows[linha].cells[coluna].className === "botao-aberto") {
     return;
   }
   if (tabela.rows[linha].cells[coluna].className === "botao-bandeira") {
+    if(contagemBombas <= bombasNiveis){
+      contagemBombas += 1;
+    document.querySelector("#contadorDeBombas").innerHTML = contagemBombas;
     tabela.rows[linha].cells[coluna].className = "botao";
+    }
   } else {
+    if(contagemBombas > 0){
+    contagemBombas -= 1
+    document.querySelector("#contadorDeBombas").innerHTML = contagemBombas;
     tabela.rows[linha].cells[coluna].className = "botao-bandeira";
+    tempo();
+    }
   }
 }
 
@@ -139,8 +155,10 @@ function verificarGanhou(){
     console.log("botão vazio: ", btnVazios)
     console.log("botão zeros: ", qtdNumeros)
     if(qtdNumeros == btnVazios){
-        console.log("ganhou")
+      document.querySelector("#btnReiniciar").className = "botao-reiniciar-ganhou";
+      document.querySelector("#mensagem").className = "visivel";
         terminou = true;
+        pause();
     }
 }
 
@@ -169,8 +187,12 @@ function selecionarNiveis(){
  }
 
  function reiniciar(){
+  document.querySelector("#btnReiniciar").className = "botao-reiniciar"
+  document.querySelector("#mensagem").className = "invisivel";
   iniciar();
   terminou = false;
+  pause();
+  zerarTempo();
  }
 
  function gerarNumero(){
@@ -226,4 +248,10 @@ function selecionarNiveis(){
 
 function pause(){
   clearInterval(intervalo);
+  intervalo = undefined;
+}
+
+function zerarTempo(){
+  var tempo = document.querySelector("#temporizador")
+  tempo.innerHTML = "0:0";
 }
