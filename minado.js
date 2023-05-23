@@ -1,6 +1,7 @@
 var terminou = false;
 var tamanhoDoMapa = 3;
 var mapaDeMinas = [];
+var intervalo;
 
 
 function iniciar() {
@@ -74,16 +75,15 @@ function cliqueDoUsuario(linha, coluna, evento) {
     return;
   }
 
-
   if (mapaDeMinas[linha][coluna] != "*") {
-    tabela.rows[linha].cells[coluna].className = "botao-aberto";
-    verificarGanhou()
+    tabela.rows[linha].cells[coluna].className = "botao-aberto n" + mapaDeMinas[linha][coluna];
+    tabela.rows[linha].cells[coluna].innerHTML = mapaDeMinas[linha][coluna];
+    tempo();
+    verificarGanhou();
   } else if (mapaDeMinas[linha][coluna] === "*") {
-    tabela.rows[linha].cells[coluna].className = "botao-bomba";
-    var divMensagem = document.getElementById("msgPerdeu")
-      terminou = true;
-      divMensagem.className = "visivel"
     mostrarBombas()
+    tabela.rows[linha].cells[coluna].className = "botao-bomba botao-bomba-clicou";
+      terminou = true;
 }
 }
 
@@ -123,25 +123,24 @@ function mostrarBombas(){
 
 function verificarGanhou(){
     var tabela = document.querySelector('table');
-    var qtdZeros = 0;
+    var qtdNumeros = 0;
     var btnVazios = 0;
 
     for(var coluna = 0; coluna < tamanhoDoMapa; coluna++){
         for(var linha = 0; linha < tamanhoDoMapa; linha++){
-            if(tabela.rows[linha].cells[coluna].className == "botao-aberto"){
+            if(tabela.rows[linha].cells[coluna].className == "botao-aberto n" + mapaDeMinas[linha][coluna]){
                 btnVazios++
             }
             if(mapaDeMinas[linha][coluna] != "*"){
-                qtdZeros++
+                qtdNumeros++
             }
         }
     }
-    if(qtdZeros == btnVazios){
+    console.log("botão vazio: ", btnVazios)
+    console.log("botão zeros: ", qtdNumeros)
+    if(qtdNumeros == btnVazios){
         console.log("ganhou")
-        var divJogo = document.getElementById("jogo")
-        var divMensagem = document.getElementById("msgGanhou")
         terminou = true;
-        divMensagem.className = 'visivel'
     }
 }
 
@@ -171,13 +170,7 @@ function selecionarNiveis(){
 
  function reiniciar(){
   iniciar();
-  var divJogo = document.getElementById("jogo")
-  var divMensagemGanhou = document.getElementById("msgGanhou")
-  var divMensagemPerdeu = document.getElementById("msgPerdeu")
   terminou = false;
-  divJogo.className = 'visivel'
-  divMensagemGanhou.className = 'invisivel'
-  divMensagemPerdeu.className = 'invisivel'
  }
 
  function gerarNumero(){
@@ -195,8 +188,42 @@ function selecionarNiveis(){
           }
       }
       mapaDeMinas[linha][coluna] = quantidadeAoRedor;
-      console.log(quantidadeAoRedor+" linha: "+linha+" coluna: "+coluna)
     }
   }
   }
  }
+
+ function tempo(){
+  if(intervalo != undefined){
+    console.log("intervalo já foi criado")
+    return;
+  }
+
+  console.log("iniciou tempo");
+  var hrs = 0;
+  var min = 0;
+  var seg = 0
+
+  var cron = 1000;
+
+  intervalo = setInterval(function (){
+    seg++
+
+    if (seg == 60) {
+      seg = 0;
+      min++;
+    }
+
+    if (min == 60) {
+      min = 0;
+      hrs++;
+    }
+    var minutos = document.getElementById("temporizador");
+    minutos.innerHTML = `${min}:${seg}`
+  }, cron)
+
+}
+
+function pause(){
+  clearInterval(intervalo);
+}

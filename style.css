@@ -74,34 +74,95 @@ select{
 }
 
 .quantidadeBombas{
-    display: inline-block;
-    height: 35px;
-    width: 70px;
+    flex-grow: 1;
     font-size: 25px;
     background-color: black;
     color: red;
     text-align: center;
 }
 
-
-.tempo{
-    display: inline-block;
-    height: 35px;
-    width: 70px;
-    font-size: 25px;
+.temporizador{
+    flex-grow: 1;
+    font-size: 20px;
     background-color: black;
     color: red;
     text-align: center;
-    margin: 1em auto;
+}
+
+
+#tempo{
+    display: flex;
+    flex-direction: row;
+    font-size: 25px;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .botao-reniciar{
+    width: 35px;
+    height: 35px;
+    border: 5px inset #eee;
+    background: #ccc center/contain url('img/feliz.png') no-repeat;
+    margin: 0 20px;
+}
+
+.botao-bomba-clicou{
+    background-color: red;
+}
+
+.n1{
+    color: blue;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.n2{
+    color: green;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+.n3{
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+.n4{
+    color: rgb(1, 1, 67);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+.n5{
+    color: rgb(90, 3, 3);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+.n6{
+    color: brown;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.n7{
+    color: rgb(51, 1, 51);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.reniciar-perdeu{
     display: inline-block;
     align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
     border: 5px inset #eee;
-    background: #ccc center/contain url('img/feliz.png') no-repeat;
+    background: #ccc center/contain url('img/triste.png') no-repeat;
     margin: 1em auto;
 }
