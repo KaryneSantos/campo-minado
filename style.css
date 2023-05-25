@@ -84,6 +84,7 @@ div{
     margin: 15px;
     border-radius: 5px;
     font-size: 20px;
+    color: green;
     font-family: "Orbitron", sans-serif;
 }
 
@@ -113,6 +114,7 @@ select{
 
 .quantidadeBombas{
     flex: 1;
+    width: 50%;
     font-size: 15px;
     font-family: 'Orbitron', sans-serif;
     background-color: black;
@@ -123,6 +125,7 @@ select{
 .temporizador{
     flex: 1;
     font-size: 15px;
+    width: 50%;
     font-family: 'Orbitron', sans-serif;
     background-color: black;
     color: red;
@@ -190,25 +193,28 @@ select{
 /* botões reiniciar */
 
 .botao-reiniciar{
+    text-align: center;
     width: 35px;
     height: 35px;
     border: 5px outset #eee;
     background:center/contain url('img/neutro.png') no-repeat;
-    margin: 0 20px;
+    margin: 0 10px;
 }
 
 .botao-reiniciar-perdeu{
+    text-align: center;
     width: 35px;
     height: 35px;
     border: 5px inset #eee;
     background: center/contain url('img/triste.png') no-repeat;
-    margin: 0 20px;
+    margin: 0 10px;
 }
 
 .botao-reiniciar-ganhou{
+    text-align: center;
     width: 35px;
     height: 35px;
     border: 5px inset #eee;
     background: center/contain url('img/feliz.png') no-repeat;
-    margin: 0 20px;
+    margin: 0 10px;
 }

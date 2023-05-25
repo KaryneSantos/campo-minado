@@ -5,6 +5,7 @@ var intervalo = undefined;
 var contagemBombas = 0;
 var bombasNiveis = 0;
 
+// Iniciando o jogo 
 
 function iniciar() {
   console.log("Iniciando jogo...");
@@ -14,6 +15,8 @@ function iniciar() {
   gerarMapa();
   desenharMapa();
 }
+
+// Gerando o mapa de minas
 
 function gerarMapa(){
   console.log("Gerando mapa de minas...");
@@ -41,6 +44,8 @@ function gerarMapa(){
   contador.innerHTML = `${contagemBombas}`.padStart(3, "0");  
   console.log("Mapa gerado:", mapaDeMinas);
 }
+
+// Desenhando o mapa de minas no site
 
 function desenharMapa() {
   console.log("Desenhando na tela...");
@@ -94,6 +99,8 @@ function cliqueDoUsuario(linha, coluna, evento) {
 }
 }
 
+// Inserindo a Bandeira 
+
 function adicionarBandeira(linha, coluna, tabela){
 
   if(terminou){
@@ -126,6 +133,8 @@ function adicionarBandeira(linha, coluna, tabela){
   }
 }
 
+// Mostrando as bombas, quando perde
+
 function mostrarBombas(){
     for(var coluna = 0; coluna < tamanhoDoMapa; coluna++){
         for(var linha = 0; linha < tamanhoDoMapa; linha++){
@@ -141,6 +150,8 @@ function mostrarBombas(){
     }
 }
 
+// Faz uma verificação para saber se ganhou
+ 
 function verificarGanhou(){
     var tabela = document.querySelector('table');
     var qtdNumeros = 0;
@@ -165,6 +176,8 @@ function verificarGanhou(){
         pause();
     }
 }
+
+// Quando o jogandor mudar de nível, mudar o mapa 
 
 function selecionarNiveis(){
 
@@ -191,6 +204,8 @@ function selecionarNiveis(){
     }
  }
 
+//  Reinicia o jogo
+
  function reiniciar(){
   document.querySelector("#btnReiniciar").className = "botao-reiniciar"
   document.querySelector("#mensagem").className = "invisivel";
@@ -199,6 +214,8 @@ function selecionarNiveis(){
   pause();
   zerarTempo();
  }
+
+//  Gerando os números de bombas que tem ao redor
 
  function gerarNumero(){
   for(var linha = 0; linha < tamanhoDoMapa; linha++){
@@ -219,6 +236,8 @@ function selecionarNiveis(){
   }
   }
  }
+
+//  Iniciando o tempo
 
  function tempo(){
   if(intervalo != undefined){
