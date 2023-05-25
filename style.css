@@ -50,6 +50,9 @@ div{
     background: #ccc center/contain url('img/bombear.png') no-repeat;
 }
 
+.botao-bomba-clicou{
+    background-color: red;
+}
 .visivel{
     display: block;
 }
@@ -112,10 +115,6 @@ select{
     text-align: center;
     align-items: center;
     justify-content: space-between;
-}
-
-.botao-bomba-clicou{
-    background-color: red;
 }
 
 .n1{

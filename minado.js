@@ -77,7 +77,7 @@ function cliqueDoUsuario(linha, coluna, evento) {
     evento.preventDefault();
     return;
   }
-
+ 
   if (mapaDeMinas[linha][coluna] != "*") {
     tabela.rows[linha].cells[coluna].className = "botao-aberto n" + mapaDeMinas[linha][coluna];
     if(mapaDeMinas[linha][coluna] > 0){
@@ -170,6 +170,7 @@ function selecionarNiveis(){
   }
     var select = parseInt(document.getElementById("dificuldade").value)
     console.log("selecionado: ", select);
+
     switch(select){
      case 1:
          tamanhoDoMapa = 3;
