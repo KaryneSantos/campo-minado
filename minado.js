@@ -38,7 +38,7 @@ function gerarMapa(){
 
   var contador = document.getElementById('contadorDeBombas');
   contador.value;
-  contador.innerHTML = contagemBombas;  
+  contador.innerHTML = `${contagemBombas}`.padStart(3, "0");  
   console.log("Mapa gerado:", mapaDeMinas);
 }
 
@@ -113,13 +113,13 @@ function adicionarBandeira(linha, coluna, tabela){
   if (tabela.rows[linha].cells[coluna].className === "botao-bandeira") {
     if(contagemBombas <= bombasNiveis){
       contagemBombas += 1;
-    document.querySelector("#contadorDeBombas").innerHTML = contagemBombas;
+    document.querySelector("#contadorDeBombas").innerHTML = `${contagemBombas}`.padStart(3, "0");
     tabela.rows[linha].cells[coluna].className = "botao";
     }
   } else {
     if(contagemBombas > 0){
     contagemBombas -= 1
-    document.querySelector("#contadorDeBombas").innerHTML = contagemBombas;
+    document.querySelector("#contadorDeBombas").innerHTML = `${contagemBombas}`.padStart(3, "0");
     tabela.rows[linha].cells[coluna].className = "botao-bandeira";
     tempo();
     }
@@ -129,9 +129,13 @@ function adicionarBandeira(linha, coluna, tabela){
 function mostrarBombas(){
     for(var coluna = 0; coluna < tamanhoDoMapa; coluna++){
         for(var linha = 0; linha < tamanhoDoMapa; linha++){
+          var tabela = document.querySelector("table");
             if(mapaDeMinas[linha][coluna] == "*") {
-                var tabela = document.querySelector("table");
                 tabela.rows[linha].cells[coluna].className = "botao-bomba";
+            }
+            if(mapaDeMinas[linha][coluna] != "*" && tabela.rows[linha].cells[coluna].className == "botao-bandeira"){
+              console.log("local da bandeira errada!")
+              tabela.rows[linha].cells[coluna].className = "botao-bandeira botao-bandeira-fechar";
             }
         }
     }
@@ -242,7 +246,7 @@ function selecionarNiveis(){
       hrs++;
     }
     var minutos = document.getElementById("temporizador");
-    minutos.innerHTML = `${min}:${seg}`
+    minutos.innerHTML = `${min}`.padStart(2, "0") + `${seg}`.padStart(2, "0")
   }, cron)
 
 }
@@ -254,5 +258,5 @@ function pause(){
 
 function zerarTempo(){
   var tempo = document.querySelector("#temporizador")
-  tempo.innerHTML = "0:0";
+  tempo.innerHTML = `0:0`.padStart(2, "0");
 }
