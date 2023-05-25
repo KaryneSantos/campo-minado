@@ -246,7 +246,7 @@ function selecionarNiveis(){
       hrs++;
     }
     var minutos = document.getElementById("temporizador");
-    minutos.innerHTML = `${min}`.padStart(2, "0") + `${seg}`.padStart(2, "0")
+    minutos.innerHTML = min.toString().padStart(2, "0") +":"+ seg.toString().padStart(2, "0")
   }, cron)
 
 }
@@ -258,5 +258,5 @@ function pause(){
 
 function zerarTempo(){
   var tempo = document.querySelector("#temporizador")
-  tempo.innerHTML = `0:0`.padStart(2, "0");
+  tempo.innerHTML = "00:00";
 }
